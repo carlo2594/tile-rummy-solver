@@ -565,7 +565,7 @@ function loadPuzzleFromHash() {
 }
 window.addEventListener('hashchange', loadPuzzleFromHash);
 if (!loadPuzzleFromHash()) {
-  if (state.table.flat().every(n => !n) && state.rack.flat().every(n => !n)) loadExample();
+  // First visit starts empty; returning visitors get their saved board back. "Load example" is one tap away.
   render(); save(); runSolve();
 }
 document.getElementById('hist-back').addEventListener('click', () => travel(-1));
