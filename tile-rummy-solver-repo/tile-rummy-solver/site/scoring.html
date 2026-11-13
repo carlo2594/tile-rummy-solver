@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Rummikub Scoring: How to Count Points at the End</title>
+<meta name="description" content="How scoring works in Rummikub-style tile rummy: penalty points, the joker 30, a worked example, what happens when the pool runs out, and keeping score.">
+<link rel="canonical" href="https://tilerummysolver.com/scoring">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Tile Rummy Solver">
+<meta property="og:title" content="Rummikub Scoring: How to Count Points at the End">
+<meta property="og:description" content="How scoring works in Rummikub-style tile rummy: penalty points, the joker 30, a worked example, what happens when the pool runs out, and keeping score.">
+<meta property="og:url" content="https://tilerummysolver.com/scoring">
+<meta property="og:image" content="https://tilerummysolver.com/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Tile Rummy Solver: find the best move in tile rummy">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#2f5d50">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="icon" href="favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="stylesheet" href="site.css">
+</head>
+<body>
+<header class="topbar"><div class="topbar-in">
+  <a class="brand" href="index.html"><span class="brand-tile" aria-hidden="true">7</span>Tile Rummy Solver</a>
+  <nav class="nav" aria-label="Main"><a href="index.html">Solver</a><a href="how-to-play.html">Rules</a><a href="strategy.html">Strategy</a><a href="puzzles.html">Puzzles</a><a href="faq.html">FAQ</a></nav>
+</div></header>
+<main class="prose">
+<h1>How scoring works</h1>
+<p class="intro">A game is usually several rounds. Here's how to count points at the end of each one.</p>
+
+<h2>When a round ends</h2>
+<p>The round ends as soon as one player plays their last tile. That player wins the round.</p>
+
+<h2>Counting the points</h2>
+<ol>
+  <li>Every other player adds up the numbers on the tiles still on their rack.</li>
+  <li>A joker left on a rack counts as <strong>30</strong>.</li>
+  <li>Each of those players writes their total as a <strong>minus</strong> score.</li>
+  <li>The winner scores the <strong>sum of everyone else's totals</strong> as a plus score.</li>
+</ol>
+
+<h2>Example</h2>
+<p>Ana goes out. The others have:</p>
+<ul>
+  <li>Ben: <span class="tiles-inline"><span class="t r">3</span><span class="t k">9</span></span> = −12</li>
+  <li>Cara: <span class="tiles-inline"><span class="t b">12</span><span class="t j" aria-label="joker">☺</span></span> = −42</li>
+  <li>Dev: <span class="tiles-inline"><span class="t o">1</span><span class="t o">2</span></span> = −3</li>
+</ul>
+<p>Ana scores +57 (12 + 42 + 3). The scores for the round always add up to zero.</p>
+
+<h2>If the pool runs out</h2>
+<p>If the pool is empty and nobody can play, the round ends. The player with the lowest total on their rack wins, and everyone counts the difference between their total and the winner's total.</p>
+
+<h2>Keeping score across rounds</h2>
+<p>Write each round's scores in a column per player. Play a set number of rounds, or until someone passes a target, and the highest total wins.</p>
+
+<h2>Scoring tips</h2>
+<ul>
+  <li>Late in a round, get rid of high tiles and jokers first. A 13 left on your rack costs more than a 2.</li>
+  <li>When an opponent is down to a few tiles, playing two high tiles beats drawing.</li>
+</ul>
+<p>The <a href="index.html">solver</a> breaks ties by playing higher tiles, so it already leans toward moves that cut your penalty.</p>
+
+<div class="callout"><strong>House rules:</strong> some groups score only the winner's points, or count the joker as 50. Agree before you start.</div>
+</main>
+<footer class="sitefoot"><div class="sitefoot-in">
+  <nav class="guides" aria-label="Guides"><a href="how-to-play.html">How to play</a><a href="first-meld.html">First meld</a><a href="jokers.html">Jokers</a><a href="scoring.html">Scoring</a><a href="strategy.html">Strategy tips</a><a href="puzzles.html">Practice puzzles</a><a href="faq.html">FAQ</a><a href="about.html">About</a><a href="privacy.html">Privacy policy</a></nav>
+  <span>© <span data-year>2026</span> Tile Rummy Solver · by Carlo J · <a href="mailto:support@tilerummysolver.com">support@tilerummysolver.com</a></span>
+  <a class="tip" data-kofi href="#" hidden>☕ Support this project</a>
+  <span class="tm">Works with Rummikub® and other tile rummy games. Rummikub® is a registered trademark of its owner. Tile Rummy Solver is an independent fan-made tool and is not affiliated with or endorsed by the trademark owner.</span>
+</div></footer>
+<script src="site.js"></script>
+</body>
+</html>

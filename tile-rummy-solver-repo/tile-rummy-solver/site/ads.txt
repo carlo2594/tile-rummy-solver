@@ -1,0 +1,5 @@
+# ads.txt for tilerummysolver.com
+# After AdSense approves you, replace the line below with the one AdSense shows you
+# (AdSense > Sites > ads.txt), then remove the "# " at its start.
+# Your publisher ID is in AdSense > Account > Account information (it starts with pub-).
+# google.com, pub-0000000000000000, DIRECT, f08c47fec0942fa0

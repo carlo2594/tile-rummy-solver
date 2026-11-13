@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Rummikub Practice Puzzles: Find the Hidden Move</title>
+<meta name="description" content="Six practice puzzles for Rummikub-style tile rummy, from easy to hard: extend runs, split runs, borrow tiles, rebuild the table and free the joker.">
+<link rel="canonical" href="https://tilerummysolver.com/puzzles">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Tile Rummy Solver">
+<meta property="og:title" content="Rummikub Practice Puzzles: Find the Hidden Move">
+<meta property="og:description" content="Six practice puzzles for Rummikub-style tile rummy, from easy to hard: extend runs, split runs, borrow tiles, rebuild the table and free the joker.">
+<meta property="og:url" content="https://tilerummysolver.com/puzzles">
+<meta property="og:image" content="https://tilerummysolver.com/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Tile Rummy Solver: find the best move in tile rummy">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#2f5d50">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="icon" href="favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="stylesheet" href="site.css">
+</head>
+<body>
+<header class="topbar"><div class="topbar-in">
+  <a class="brand" href="index.html"><span class="brand-tile" aria-hidden="true">7</span>Tile Rummy Solver</a>
+  <nav class="nav" aria-label="Main"><a href="index.html">Solver</a><a href="how-to-play.html">Rules</a><a href="strategy.html">Strategy</a><a href="puzzles.html" aria-current="page">Puzzles</a><a href="faq.html">FAQ</a></nav>
+</div></header>
+<main class="prose">
+<h1>Practice puzzles</h1>
+<p class="intro">Each puzzle shows a table and a rack. Find the move that plays the most tiles, then check the answer or open it in the solver.</p>
+<section class="puzzle" id="puzzle-1">
+  <span class="lvl">Puzzle 1 · Easy</span>
+  <h2>Extend a run</h2>
+  <div class="row"><b>Table</b><span class="tiles-inline"><span class="t r">3</span><span class="t r">4</span><span class="t r">5</span></span> <span class="tiles-inline"><span class="t b">7</span><span class="t k">7</span><span class="t o">7</span></span></div>
+  <div class="row"><b>Rack</b><span class="tiles-inline"><span class="t r">6</span><span class="t b">2</span></span></div>
+  <details><summary>Hint</summary><p>Look at the end of the red run.</p></details>
+  <details><summary>Show the answer</summary>
+    <p>Play <strong>1 tile</strong> (6 points). The table ends up as (your tiles outlined):</p>
+    <div class="sets"><span class="tiles-inline"><span class="t r">3</span><span class="t r">4</span><span class="t r">5</span><span class="t r new">6</span></span><span class="tiles-inline"><span class="t b">7</span><span class="t k">7</span><span class="t o">7</span></span></div>
+  </details>
+  <div class="actions"><a class="cta" href="index.html#puzzle-1">Open in the solver</a></div>
+</section><section class="puzzle" id="puzzle-2">
+  <span class="lvl">Puzzle 2 · Easy</span>
+  <h2>Split a long run</h2>
+  <div class="row"><b>Table</b><span class="tiles-inline"><span class="t b">2</span><span class="t b">3</span><span class="t b">4</span><span class="t b">5</span><span class="t b">6</span><span class="t b">7</span></span></div>
+  <div class="row"><b>Rack</b><span class="tiles-inline"><span class="t b">4</span><span class="t k">9</span></span></div>
+  <details><summary>Hint</summary><p>A run of six can become two runs of three or more.</p></details>
+  <details><summary>Show the answer</summary>
+    <p>Play <strong>1 tile</strong> (4 points). The table ends up as (your tiles outlined):</p>
+    <div class="sets"><span class="tiles-inline"><span class="t b">2</span><span class="t b">3</span><span class="t b new">4</span></span><span class="tiles-inline"><span class="t b">4</span><span class="t b">5</span><span class="t b">6</span><span class="t b">7</span></span></div>
+  </details>
+  <div class="actions"><a class="cta" href="index.html#puzzle-2">Open in the solver</a></div>
+</section><section class="puzzle" id="puzzle-3">
+  <span class="lvl">Puzzle 3 · Medium</span>
+  <h2>Borrow from a group of four</h2>
+  <div class="row"><b>Table</b><span class="tiles-inline"><span class="t r">8</span><span class="t b">8</span><span class="t k">8</span><span class="t o">8</span></span> <span class="tiles-inline"><span class="t k">1</span><span class="t k">2</span><span class="t k">3</span></span></div>
+  <div class="row"><b>Rack</b><span class="tiles-inline"><span class="t r">9</span><span class="t r">10</span><span class="t o">4</span></span></div>
+  <details><summary>Hint</summary><p>A group of four still works with three tiles.</p></details>
+  <details><summary>Show the answer</summary>
+    <p>Play <strong>2 tiles</strong> (19 points). The table ends up as (your tiles outlined):</p>
+    <div class="sets"><span class="tiles-inline"><span class="t k">1</span><span class="t k">2</span><span class="t k">3</span></span><span class="tiles-inline"><span class="t b">8</span><span class="t k">8</span><span class="t o">8</span></span><span class="tiles-inline"><span class="t r">8</span><span class="t r new">9</span><span class="t r new">10</span></span></div>
+  </details>
+  <div class="actions"><a class="cta" href="index.html#puzzle-3">Open in the solver</a></div>
+</section><section class="puzzle" id="puzzle-4">
+  <span class="lvl">Puzzle 4 · Medium</span>
+  <h2>Turn runs into groups</h2>
+  <div class="row"><b>Table</b><span class="tiles-inline"><span class="t r">4</span><span class="t r">5</span><span class="t r">6</span></span> <span class="tiles-inline"><span class="t b">4</span><span class="t b">5</span><span class="t b">6</span></span> <span class="tiles-inline"><span class="t k">4</span><span class="t k">5</span><span class="t k">6</span></span></div>
+  <div class="row"><b>Rack</b><span class="tiles-inline"><span class="t o">4</span><span class="t o">5</span></span></div>
+  <details><summary>Hint</summary><p>Two orange tiles can’t make a run on their own. What if the table were groups instead?</p></details>
+  <details><summary>Show the answer</summary>
+    <p>Play <strong>2 tiles</strong> (9 points). The table ends up as (your tiles outlined):</p>
+    <div class="sets"><span class="tiles-inline"><span class="t r">4</span><span class="t b">4</span><span class="t k">4</span><span class="t o new">4</span></span><span class="tiles-inline"><span class="t r">5</span><span class="t b">5</span><span class="t k">5</span><span class="t o new">5</span></span><span class="tiles-inline"><span class="t r">6</span><span class="t b">6</span><span class="t k">6</span></span></div>
+  </details>
+  <div class="actions"><a class="cta" href="index.html#puzzle-4">Open in the solver</a></div>
+</section><section class="puzzle" id="puzzle-5">
+  <span class="lvl">Puzzle 5 · Hard</span>
+  <h2>Free the joker</h2>
+  <div class="row"><b>Table</b><span class="tiles-inline"><span class="t r">10</span><span class="t j" aria-label="joker">☺</span><span class="t r">12</span></span> <span class="tiles-inline"><span class="t k">4</span><span class="t k">5</span><span class="t k">6</span></span></div>
+  <div class="row"><b>Rack</b><span class="tiles-inline"><span class="t r">11</span><span class="t b">11</span><span class="t o">11</span></span></div>
+  <details><summary>Hint</summary><p>The joker is standing in for a tile you have.</p></details>
+  <details><summary>Show the answer</summary>
+    <p>Play <strong>3 tiles</strong> (33 points). The table ends up as (your tiles outlined):</p>
+    <div class="sets"><span class="tiles-inline"><span class="t k">4</span><span class="t k">5</span><span class="t k">6</span></span><span class="tiles-inline"><span class="t b new">11</span><span class="t j">☺</span><span class="t o new">11</span></span><span class="tiles-inline"><span class="t r">10</span><span class="t r new">11</span><span class="t r">12</span></span></div>
+  </details>
+  <div class="actions"><a class="cta" href="index.html#puzzle-5">Open in the solver</a></div>
+</section><section class="puzzle" id="puzzle-6">
+  <span class="lvl">Puzzle 6 · Easy · First meld</span>
+  <h2>Make your first meld</h2>
+  <div class="row"><b>Table</b><span class="updated">Empty: this is your opening play.</span></div>
+  <div class="row"><b>Rack</b><span class="tiles-inline"><span class="t r">10</span><span class="t r">11</span><span class="t r">12</span><span class="t b">1</span><span class="t k">1</span><span class="t o">1</span><span class="t b">7</span></span></div>
+  <details><summary>Hint</summary><p>You need 30 points from your own tiles. Every set you lay down counts.</p></details>
+  <details><summary>Show the answer</summary>
+    <p>Play <strong>6 tiles</strong> (36 points). The table ends up as (your tiles outlined):</p>
+    <div class="sets"><span class="tiles-inline"><span class="t b new">1</span><span class="t k new">1</span><span class="t o new">1</span></span><span class="tiles-inline"><span class="t r new">10</span><span class="t r new">11</span><span class="t r new">12</span></span></div>
+  </details>
+  <div class="actions"><a class="cta" href="index.html#puzzle-6">Open in the solver</a></div>
+</section>
+<p>Made up your own? Enter any position in the <a href="index.html">solver</a>. More tips are on the <a href="strategy.html">strategy page</a>.</p>
+</main>
+<footer class="sitefoot"><div class="sitefoot-in">
+  <nav class="guides" aria-label="Guides"><a href="how-to-play.html">How to play</a><a href="first-meld.html">First meld</a><a href="jokers.html">Jokers</a><a href="scoring.html">Scoring</a><a href="strategy.html">Strategy tips</a><a href="puzzles.html">Practice puzzles</a><a href="faq.html">FAQ</a><a href="about.html">About</a><a href="privacy.html">Privacy policy</a></nav>
+  <span>© <span data-year>2026</span> Tile Rummy Solver · by Carlo J · <a href="mailto:support@tilerummysolver.com">support@tilerummysolver.com</a></span>
+  <a class="tip" data-kofi href="#" hidden>☕ Support this project</a>
+  <span class="tm">Works with Rummikub® and other tile rummy games. Rummikub® is a registered trademark of its owner. Tile Rummy Solver is an independent fan-made tool and is not affiliated with or endorsed by the trademark owner.</span>
+</div></footer>
+<script src="site.js"></script>
+</body>
+</html>

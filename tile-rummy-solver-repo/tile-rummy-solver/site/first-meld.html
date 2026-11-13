@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Rummikub First Meld: The 30-Point Rule Explained</title>
+<meta name="description" content="How the 30-point initial meld works in Rummikub-style games: what counts, jokers, examples, common mistakes and how to find your opening play.">
+<link rel="canonical" href="https://tilerummysolver.com/first-meld">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Tile Rummy Solver">
+<meta property="og:title" content="Rummikub First Meld: The 30-Point Rule Explained">
+<meta property="og:description" content="How the 30-point initial meld works in Rummikub-style games: what counts, jokers, examples, common mistakes and how to find your opening play.">
+<meta property="og:url" content="https://tilerummysolver.com/first-meld">
+<meta property="og:image" content="https://tilerummysolver.com/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Tile Rummy Solver: find the best move in tile rummy">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#2f5d50">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="icon" href="favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="stylesheet" href="site.css">
+</head>
+<body>
+<header class="topbar"><div class="topbar-in">
+  <a class="brand" href="index.html"><span class="brand-tile" aria-hidden="true">7</span>Tile Rummy Solver</a>
+  <nav class="nav" aria-label="Main"><a href="index.html">Solver</a><a href="how-to-play.html">Rules</a><a href="strategy.html">Strategy</a><a href="puzzles.html">Puzzles</a><a href="faq.html">FAQ</a></nav>
+</div></header>
+<main class="prose">
+<h1>The first meld (30 points)</h1>
+<p class="intro">Your opening play has its own rule. Until you make it, you can't touch the table at all.</p>
+
+<h2>The rule</h2>
+<p>Your first play must be one or more valid sets, all from your own rack, worth at least <strong>30 points</strong> in total. Each tile is worth its number. You add up every set you lay down that turn.</p>
+<ul>
+  <li><span class="tiles-inline"><span class="t r">10</span><span class="t r">11</span><span class="t r">12</span></span> = 33 points. That's enough on its own.</li>
+  <li><span class="tiles-inline"><span class="t b">5</span><span class="t k">5</span><span class="t o">5</span></span> = 15 and <span class="tiles-inline"><span class="t o">7</span><span class="t o">8</span><span class="t o">9</span></span> = 24. Together that's 39, which is enough.</li>
+  <li><span class="tiles-inline"><span class="t r">1</span><span class="t b">1</span><span class="t k">1</span></span> = 3. Low tiles barely help.</li>
+</ul>
+
+<h2>What you can't do on the first meld</h2>
+<ul>
+  <li>Use tiles that are already on the table, or add to other players' sets.</li>
+  <li>Rearrange the table. That's allowed from your next turn onward.</li>
+  <li>Count tiles that aren't in a finished, valid set.</li>
+</ul>
+<p>Once your first meld is down, some groups let you keep playing on that same turn, and others make you wait a turn. Agree before the game.</p>
+
+<h2>Jokers in the first meld</h2>
+<p>A joker counts as the number it stands for. In <span class="tiles-inline"><span class="t r">9</span><span class="t j" aria-label="joker">☺</span><span class="t r">11</span></span>, the joker is a 10, so the run is worth 30.</p>
+
+<h2>If you can't make 30</h2>
+<p>Draw one tile and your turn ends. That's common in the first few rounds. Keep your high tiles together, because they get you to 30 fastest.</p>
+
+<h2>Tips</h2>
+<ul>
+  <li>Look for high runs and groups first (10s to 13s).</li>
+  <li>Two small sets can add up. Don't stop at the first set you see.</li>
+  <li>If you make 30 with tiles to spare, think about holding some back so you have options next turn.</li>
+</ul>
+
+<h2>Let the solver check</h2>
+<p>In the <a href="index.html">solver</a>, mark your rack in step 2 and tick <em>First meld</em>. It finds the highest-scoring opening play from your own tiles, or tells you to draw if you can't reach 30. Try <a href="index.html#puzzle-6">this example</a>.</p>
+
+<div class="callout"><strong>House rules:</strong> some groups play with a 50-point first meld or no minimum at all. The solver uses the standard 30.</div>
+</main>
+<footer class="sitefoot"><div class="sitefoot-in">
+  <nav class="guides" aria-label="Guides"><a href="how-to-play.html">How to play</a><a href="first-meld.html">First meld</a><a href="jokers.html">Jokers</a><a href="scoring.html">Scoring</a><a href="strategy.html">Strategy tips</a><a href="puzzles.html">Practice puzzles</a><a href="faq.html">FAQ</a><a href="about.html">About</a><a href="privacy.html">Privacy policy</a></nav>
+  <span>© <span data-year>2026</span> Tile Rummy Solver · by Carlo J · <a href="mailto:support@tilerummysolver.com">support@tilerummysolver.com</a></span>
+  <a class="tip" data-kofi href="#" hidden>☕ Support this project</a>
+  <span class="tm">Works with Rummikub® and other tile rummy games. Rummikub® is a registered trademark of its owner. Tile Rummy Solver is an independent fan-made tool and is not affiliated with or endorsed by the trademark owner.</span>
+</div></footer>
+<script src="site.js"></script>
+</body>
+</html>

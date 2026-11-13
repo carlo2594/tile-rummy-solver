@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>About Tile Rummy Solver</title>
+<meta name="description" content="Who made Tile Rummy Solver, how the solver finds the best move in Rummikub-style games, and how to use it fairly.">
+<link rel="canonical" href="https://tilerummysolver.com/about">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Tile Rummy Solver">
+<meta property="og:title" content="About Tile Rummy Solver">
+<meta property="og:description" content="Who made Tile Rummy Solver, how the solver finds the best move in Rummikub-style games, and how to use it fairly.">
+<meta property="og:url" content="https://tilerummysolver.com/about">
+<meta property="og:image" content="https://tilerummysolver.com/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Tile Rummy Solver: find the best move in tile rummy">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#2f5d50">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="icon" href="favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="stylesheet" href="site.css">
+</head>
+<body>
+<header class="topbar"><div class="topbar-in">
+  <a class="brand" href="index.html"><span class="brand-tile" aria-hidden="true">7</span>Tile Rummy Solver</a>
+  <nav class="nav" aria-label="Main"><a href="index.html">Solver</a><a href="how-to-play.html">Rules</a><a href="strategy.html">Strategy</a><a href="puzzles.html">Puzzles</a><a href="faq.html">FAQ</a></nav>
+</div></header>
+<main class="prose">
+<h1>About</h1>
+<p class="intro">Tile Rummy Solver is a free tool that shows the best move in Rummikub and other tile rummy games. It's made by Carlo J.</p>
+
+<h2>Why it exists</h2>
+<p>The hardest part of tile rummy is seeing how to rebuild the table to fit your tiles in. Most players miss moves that were there all along. This tool shows you those moves so you can learn to spot them yourself.</p>
+
+<h2>How the solver works</h2>
+<p>You mark which tiles are on the table and which are in your rack. The solver then checks every legal way to arrange those tiles into runs and groups. It uses a method called dynamic programming: it goes through the numbers from 1 to 13, keeps track of which runs are still open, and remembers the best result for each situation so it never has to repeat work.</p>
+<p>Because it checks every possibility, the answer is the true best move: the one that plays the most tiles from your rack, with higher-value tiles breaking ties. It runs in your browser in a background thread, so the page stays responsive even on a crowded table. Nothing is sent to a server.</p>
+
+<h2>Use it fairly</h2>
+<p>This is a training and review tool. Please don't use it during games against other people, online or in person.</p>
+
+<h2>Support the project</h2>
+<p>The solver is free and supported by ads. If it helped you, a small tip helps pay for new features like scanning tiles with your camera.</p>
+<p><a class="tip" data-kofi href="#" hidden>☕ Support this project</a></p>
+
+<h2>Contact</h2>
+<p>Questions, bug reports or ideas: <a href="mailto:support@tilerummysolver.com">support@tilerummysolver.com</a>. I read every message.</p>
+</main>
+<footer class="sitefoot"><div class="sitefoot-in">
+  <nav class="guides" aria-label="Guides"><a href="how-to-play.html">How to play</a><a href="first-meld.html">First meld</a><a href="jokers.html">Jokers</a><a href="scoring.html">Scoring</a><a href="strategy.html">Strategy tips</a><a href="puzzles.html">Practice puzzles</a><a href="faq.html">FAQ</a><a href="about.html">About</a><a href="privacy.html">Privacy policy</a></nav>
+  <span>© <span data-year>2026</span> Tile Rummy Solver · by Carlo J · <a href="mailto:support@tilerummysolver.com">support@tilerummysolver.com</a></span>
+  <a class="tip" data-kofi href="#" hidden>☕ Support this project</a>
+  <span class="tm">Works with Rummikub® and other tile rummy games. Rummikub® is a registered trademark of its owner. Tile Rummy Solver is an independent fan-made tool and is not affiliated with or endorsed by the trademark owner.</span>
+</div></footer>
+<script src="site.js"></script>
+</body>
+</html>

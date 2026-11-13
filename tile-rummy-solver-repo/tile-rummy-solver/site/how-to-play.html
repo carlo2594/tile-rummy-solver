@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>How to Play Rummikub: Rules Explained Simply</title>
+<meta name="description" content="The rules of Rummikub-style tile rummy in plain words: runs, groups, the 30-point first meld, jokers, rearranging the table and scoring.">
+<link rel="canonical" href="https://tilerummysolver.com/how-to-play">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Tile Rummy Solver">
+<meta property="og:title" content="How to Play Rummikub: Rules Explained Simply">
+<meta property="og:description" content="The rules of Rummikub-style tile rummy in plain words: runs, groups, the 30-point first meld, jokers, rearranging the table and scoring.">
+<meta property="og:url" content="https://tilerummysolver.com/how-to-play">
+<meta property="og:image" content="https://tilerummysolver.com/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Tile Rummy Solver: find the best move in tile rummy">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#2f5d50">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="icon" href="favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="stylesheet" href="site.css">
+</head>
+<body>
+<header class="topbar"><div class="topbar-in">
+  <a class="brand" href="index.html"><span class="brand-tile" aria-hidden="true">7</span>Tile Rummy Solver</a>
+  <nav class="nav" aria-label="Main"><a href="index.html">Solver</a><a href="how-to-play.html" aria-current="page">Rules</a><a href="strategy.html">Strategy</a><a href="puzzles.html">Puzzles</a><a href="faq.html">FAQ</a></nav>
+</div></header>
+<main class="prose">
+<h1>How to play</h1>
+<p class="intro">The rules of Rummikub and similar tile rummy games, explained in plain words. It takes about five minutes to learn.</p>
+
+<h2>What's in the box</h2>
+<p>There are 106 tiles: the numbers 1 to 13 in four colors (red, blue, black and orange), two copies of each, plus 2 jokers. The game is for 2 to 4 players.</p>
+
+<h2>Goal</h2>
+<p>Be the first to play every tile from your rack onto the table.</p>
+
+<h2>Setup</h2>
+<ol>
+  <li>Turn all tiles face down and mix them.</li>
+  <li>Each player takes 14 tiles and stands them on their rack so nobody else can see them.</li>
+  <li>Each player draws one tile. The highest number goes first, then play passes to the left. Put those tiles back in the pool.</li>
+</ol>
+
+<h2>The two kinds of sets</h2>
+<h3>Run</h3>
+<p>Three or more numbers in a row, all the same color: <span class="tiles-inline"><span class="t r">4</span><span class="t r">5</span><span class="t r">6</span></span> or <span class="tiles-inline"><span class="t b">9</span><span class="t b">10</span><span class="t b">11</span><span class="t b">12</span></span>. A run can't wrap around from 13 back to 1.</p>
+<h3>Group</h3>
+<p>Three or four tiles with the same number, each a different color: <span class="tiles-inline"><span class="t r">8</span><span class="t b">8</span><span class="t k">8</span></span> or <span class="tiles-inline"><span class="t r">2</span><span class="t b">2</span><span class="t k">2</span><span class="t o">2</span></span>. A group can't have two tiles of the same color.</p>
+
+<h2>Your first move: the 30-point meld</h2>
+<p>Before you can do anything else, you must put down one or more sets from your own rack worth at least 30 points in total. For example, <span class="tiles-inline"><span class="t r">10</span><span class="t r">11</span><span class="t r">12</span></span> is worth 33. You can't use tiles already on the table. The <a href="first-meld.html">first meld guide</a> covers this in detail.</p>
+
+<h2>A normal turn</h2>
+<p>After your first meld, on each turn you either:</p>
+<ul>
+  <li><strong>Play</strong> one or more tiles from your rack, or</li>
+  <li><strong>Draw</strong> one tile from the pool if you can't (or don't want to) play. Your turn then ends.</li>
+</ul>
+<p>Many groups play with a time limit of one minute per turn.</p>
+
+<h2>Rearranging the table</h2>
+<p>This is what makes the game fun. On your turn you can move tiles already on the table, as long as every set is valid when you finish and you've played at least one tile from your rack. You can:</p>
+<ul>
+  <li><strong>Add</strong> to a set: put <span class="tiles-inline"><span class="t r">7</span></span> on the end of <span class="tiles-inline"><span class="t r">4</span><span class="t r">5</span><span class="t r">6</span></span>.</li>
+  <li><strong>Take</strong> a tile from a set of four or more to use somewhere else.</li>
+  <li><strong>Split</strong> a long run: <span class="tiles-inline"><span class="t b">3</span><span class="t b">4</span><span class="t b">5</span><span class="t b">6</span><span class="t b">7</span><span class="t b">8</span></span> becomes <span class="tiles-inline"><span class="t b">3</span><span class="t b">4</span><span class="t b">5</span></span> and <span class="tiles-inline"><span class="t b">6</span><span class="t b">7</span><span class="t b">8</span></span>, or you can insert a tile in the middle.</li>
+  <li><strong>Combine</strong> tiles from several sets into new ones.</li>
+</ul>
+<p>Finding these moves is the hard part, and it's exactly what the <a href="index.html">solver</a> does when you're practicing. Try the <a href="puzzles.html">practice puzzles</a> to see each kind of move.</p>
+
+<h2>Jokers</h2>
+<p>A joker can stand in for any tile. If you hold the exact tile a joker on the table stands for, you can swap it in and take the joker, but you must use the joker again on the same turn. See the <a href="jokers.html">joker guide</a>.</p>
+
+<h2>Winning and scoring</h2>
+<p>The first player to empty their rack wins the round. Everyone else loses the value of the tiles left on their rack, and a joker left over costs 30. The <a href="scoring.html">scoring guide</a> has a full example.</p>
+
+<div class="callout"><strong>House rules vary.</strong> Some groups use a different first-meld total or turn timer. Agree before you start.</div>
+
+<a class="cta" href="index.html">Try the solver</a>
+</main>
+<footer class="sitefoot"><div class="sitefoot-in">
+  <nav class="guides" aria-label="Guides"><a href="how-to-play.html">How to play</a><a href="first-meld.html">First meld</a><a href="jokers.html">Jokers</a><a href="scoring.html">Scoring</a><a href="strategy.html">Strategy tips</a><a href="puzzles.html">Practice puzzles</a><a href="faq.html">FAQ</a><a href="about.html">About</a><a href="privacy.html">Privacy policy</a></nav>
+  <span>© <span data-year>2026</span> Tile Rummy Solver · by Carlo J · <a href="mailto:support@tilerummysolver.com">support@tilerummysolver.com</a></span>
+  <a class="tip" data-kofi href="#" hidden>☕ Support this project</a>
+  <span class="tm">Works with Rummikub® and other tile rummy games. Rummikub® is a registered trademark of its owner. Tile Rummy Solver is an independent fan-made tool and is not affiliated with or endorsed by the trademark owner.</span>
+</div></footer>
+<script src="site.js"></script>
+</body>
+</html>
