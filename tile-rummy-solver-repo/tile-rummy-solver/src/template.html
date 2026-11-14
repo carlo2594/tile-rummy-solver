@@ -68,8 +68,19 @@ h2 { font-family: var(--font-display); font-weight: 800; font-size: 19px; margin
 .cell.on { opacity: 1; border: 1px solid var(--tile-edge); background: var(--tile); box-shadow: 0 2px 0 var(--tile-edge); }
 .cell.blocked { cursor: not-allowed; }
 .k0 { color: var(--c0); } .k1 { color: var(--c1); } .k2 { color: var(--c2); } .k3 { color: var(--c3); }
-:root[data-theme="dark"] .cell:not(.on).k2 { color: var(--muted); }
-@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .cell:not(.on).k2 { color: var(--muted); } }
+/* Dark mode: black numbers sit on a dark background unless the tile is selected (ivory), so lighten them */
+:root[data-theme="dark"] .cell:not(.on).k2,
+:root[data-theme="dark"] .ctab.k2:not([aria-selected="true"]) { color: var(--ink); }
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .cell:not(.on).k2,
+  :root:not([data-theme="light"]) .ctab.k2:not([aria-selected="true"]) { color: var(--ink); }
+  :root:not([data-theme="light"]) .cell:not(.on).k0, :root:not([data-theme="light"]) .ctab.k0:not([aria-selected="true"]) { color: #ff8a80; }
+  :root:not([data-theme="light"]) .cell:not(.on).k1, :root:not([data-theme="light"]) .ctab.k1:not([aria-selected="true"]) { color: #8ab4ff; }
+  :root:not([data-theme="light"]) .cell:not(.on).k3, :root:not([data-theme="light"]) .ctab.k3:not([aria-selected="true"]) { color: #f0a85a; }
+}
+:root[data-theme="dark"] .cell:not(.on).k0, :root[data-theme="dark"] .ctab.k0:not([aria-selected="true"]) { color: #ff8a80; }
+:root[data-theme="dark"] .cell:not(.on).k1, :root[data-theme="dark"] .ctab.k1:not([aria-selected="true"]) { color: #8ab4ff; }
+:root[data-theme="dark"] .cell:not(.on).k3, :root[data-theme="dark"] .ctab.k3:not([aria-selected="true"]) { color: #f0a85a; }
 .row-end { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
 .stepper { display: inline-flex; align-items: center; border: 1px solid var(--line); border-radius: 99px; overflow: hidden; }
 .stepper button { border: 0; background: transparent; color: var(--ink); width: 32px; height: 30px; font-size: 17px; cursor: pointer; }
