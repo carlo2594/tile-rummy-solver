@@ -1,6 +1,6 @@
 // ===== Edit this line when your Ko-fi page is ready =====
 const SITE = {
-  kofi: ''   // e.g. 'https://ko-fi.com/carloj'  (leave '' to keep the tip button hidden)
+  kofi: 'https://ko-fi.com/carlojimenez'   // leave '' to hide the tip button
 };
 // =========================================================
 
