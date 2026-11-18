@@ -156,6 +156,8 @@ button:focus-visible, input:focus-visible { outline: 2.5px solid var(--accent); 
 :root[data-theme="dark"] .tcheck.ok { color: #7fd6a8; }
 @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .tcheck.ok { color: #7fd6a8; } }
 .cell.suspect { outline: 2.5px solid #d93025; outline-offset: 1px; }
+.jnote { background: rgba(255,255,255,.1); border: 1px solid rgba(255,255,255,.22); border-radius: 10px; padding: 10px 14px; font-size: 14px; color: #f2f5f3; }
+.jnote.win { background: #f2c230; color: #2a2205; border-color: #f2c230; }
 .warnbox { background: #f2c230; color: #2a2205; border-radius: 10px; padding: 10px 14px; font-size: 14px; }
 .ctabs { display: none; gap: 6px; flex-wrap: wrap; }
 .ctab { flex: 1 1 0; min-width: 0; border: 1px solid var(--line); background: var(--bg); border-radius: 9px; padding: 8px 4px; font: 700 13px var(--font-body); cursor: pointer; display: inline-flex; justify-content: center; gap: 4px; }
@@ -178,6 +180,11 @@ button:focus-visible, input:focus-visible { outline: 2.5px solid var(--accent); 
   .pips i { width: 7px; height: 7px; }
 }
 @media (prefers-reduced-motion: reduce) { .spinner { animation: none; } }
+.controls { flex-direction: column; align-items: stretch; gap: 10px; }
+.btn.big-go { width: 100%; font-size: 18px; padding: 15px 22px; border-radius: 12px; }
+.opts { display: flex; gap: 8px 18px; flex-wrap: wrap; align-items: center; }
+.linkbtn { background: none; border: 0; padding: 4px 0; margin-left: auto; color: var(--accent); font: 500 14px var(--font-body); text-decoration: underline; text-underline-offset: 3px; cursor: pointer; }
+.hist-count { display: none; }
 .legend { font-size: 13px; color: #cfdcd7; display: flex; gap: 8px; align-items: center; }
 .legend .tile { width: 20px; height: 26px; font-size: 11px; }
 .empty-msg { color: #dbe6e2; margin: 0; max-width: 60ch; }
@@ -195,15 +202,13 @@ button:focus-visible, input:focus-visible { outline: 2.5px solid var(--accent); 
   <header>
     <h1>Tile Rummy Solver</h1>
     <p class="byline">by Carlo J</p>
-    <p class="lede">Works with Rummikub and other tile rummy games. Tap the tiles that are on the table and the tiles in your rack. The solver rearranges the whole table to play as many of your tiles as possible.</p>
+    <p class="lede">Tap your tiles. Get the best move. Works with Rummikub-style games.</p>
   </header>
 
   <div class="legend-row" aria-label="How tapping works">
-    <span>Every tile comes in two copies. Tap to count them:</span>
-    <span class="ex"><span class="cell k0" aria-hidden="true">5<span class="pips"><i></i><i></i></span></span> none</span>
-    <span class="ex"><span class="cell k0 on" aria-hidden="true">5<span class="pips"><i class="f"></i><i></i></span></span> 1 tap = one</span>
-    <span class="ex"><span class="cell k0 on two" aria-hidden="true">5<span class="pips"><i class="f"></i><i class="f"></i></span></span> 2 taps = both</span>
-    <span>3rd tap clears it</span>
+    <span class="ex"><span class="cell k0 on" aria-hidden="true">5<span class="pips"><i class="f"></i><i></i></span></span> 1 tap</span>
+    <span class="ex"><span class="cell k0 on two" aria-hidden="true">5<span class="pips"><i class="f"></i><i class="f"></i></span></span> 2 taps (both copies)</span>
+    <span>3rd tap clears</span>
   </div>
 
   <div class="histbar" role="group" aria-label="History">
@@ -215,7 +220,7 @@ button:focus-visible, input:focus-visible { outline: 2.5px solid var(--accent); 
 
   <section class="panel" aria-labelledby="t-h">
     <div class="panel-head">
-      <h2 id="t-h" class="stepped"><span class="step">1</span><span>Mark the tiles on the table<span class="sub">Every tile in the middle, from all sets</span></span></h2>
+      <h2 id="t-h" class="stepped"><span class="step">1</span><span>Table<span class="sub">Tap every tile on the table</span></span></h2>
       <div class="row-end">
         <div class="stepper" aria-label="Jokers on the table">
           <button type="button" id="tj-minus" aria-label="Remove a joker from the table">−</button>
@@ -232,7 +237,7 @@ button:focus-visible, input:focus-visible { outline: 2.5px solid var(--accent); 
 
   <section class="panel" aria-labelledby="r-h">
     <div class="panel-head">
-      <h2 id="r-h" class="stepped"><span class="step">2</span><span>Mark the tiles in your rack<span class="sub">Only your own tiles</span></span></h2>
+      <h2 id="r-h" class="stepped"><span class="step">2</span><span>Your rack<span class="sub">Tap the tiles you hold</span></span></h2>
       <div class="row-end">
         <div class="stepper" aria-label="Jokers in your rack">
           <button type="button" id="rj-minus" aria-label="Remove a joker from your rack">−</button>
@@ -246,10 +251,13 @@ button:focus-visible, input:focus-visible { outline: 2.5px solid var(--accent); 
     <div class="grid-wrap"><div class="grid" id="grid-rack"></div></div>
   </section>
 
-  <div class="controls"><span class="step" aria-hidden="true">3</span>
-    <button type="button" class="btn primary" id="solve">Find best move</button>
-    <label class="check" for="initial"><input type="checkbox" id="initial"> First meld (30+ points from my rack only)</label>
-    <button type="button" class="btn" id="example">Load example</button>
+  <div class="controls">
+    <button type="button" class="btn primary big-go" id="find-btn">Find best move</button>
+    <div class="opts">
+      <label class="check" for="initial"><input type="checkbox" id="initial"> First meld (30 pts)</label>
+      <label class="check" for="savej" title="Keeps your jokers unless playing them wins the round"><input type="checkbox" id="savej"> Save jokers for the win</label>
+      <button type="button" class="linkbtn" id="example">Load example</button>
+    </div>
   </div>
 
   <section class="result" id="result" aria-live="polite"></section>
@@ -257,17 +265,17 @@ button:focus-visible, input:focus-visible { outline: 2.5px solid var(--accent); 
   <noscript><p class="noscript">The solver needs JavaScript. Turn it on in your browser settings to use it. The <a href="how-to-play.html">rules</a> and <a href="strategy.html">strategy tips</a> work without it.</p></noscript>
 
   <section class="howto" aria-labelledby="howto-h">
-    <h2 id="howto-h">How to use the solver</h2>
+    <h2 id="howto-h">How to use</h2>
     <ol>
-      <li><strong>Mark the table.</strong> In step 1, tap every tile on the table, from all players’ sets. Tap a tile twice if both copies are out. Add any jokers on the table with the + button.</li>
-      <li><strong>Mark your rack.</strong> In step 2, tap the tiles you’re holding, and add your jokers.</li>
-      <li><strong>Find the best move.</strong> Press the button. The solver checks every way to rearrange the table and shows the move that plays the most tiles from your rack. For your opening play, tick <em>First meld</em> first.</li>
-      <li><strong>Play it and keep going.</strong> Copy the sets onto the real table, then tap <em>I played this move</em>. Your board is saved for the next turn.</li>
+      <li>Tap every tile on the <strong>table</strong>.</li>
+      <li>Tap the tiles in <strong>your rack</strong>.</li>
+      <li>Press <strong>Find best move</strong>.</li>
+      <li>Play it, then tap <strong>I played this</strong>.</li>
     </ol>
-    <p>Want practice? Try the <a href="puzzles.html">practice puzzles</a>, or read the <a href="faq.html">FAQ</a>.</p>
+    <p>Practice with the <a href="puzzles.html">puzzles</a> · Questions? See the <a href="faq.html">FAQ</a>.</p>
   </section>
 
-  <p class="foot">Each tile exists twice in a Rummikub set, so you can mark at most two copies across the table and your rack. A grey dot means that copy is already marked in the other grid. Runs are 3 or more consecutive numbers in one color; groups are 3 or 4 tiles of the same number in different colors. The solver checks every legal way to rearrange the table, so the answer is the true best move, not a guess.</p>
+  <p class="foot"><strong>Run:</strong> 3+ in a row, same color. <strong>Group:</strong> 3–4 of the same number, different colors.</p>
 </main>
 <footer class="sitefoot"><div class="sitefoot-in">
   <nav class="guides" aria-label="Guides"><a href="how-to-play.html">How to play</a><a href="first-meld.html">First meld</a><a href="jokers.html">Jokers</a><a href="scoring.html">Scoring</a><a href="strategy.html">Strategy tips</a><a href="puzzles.html">Practice puzzles</a><a href="faq.html">FAQ</a><a href="about.html">About</a><a href="privacy.html">Privacy policy</a></nav>
@@ -277,24 +285,25 @@ button:focus-visible, input:focus-visible { outline: 2.5px solid var(--accent); 
 </div></footer>
 <script src="site.js"></script>
 
-<script src="solver.js"></script>
+<script src="solver.js?v=20261117"></script>
 <script>
 // Runs the solver in a background thread so the page never freezes.
 // A new request replaces an unfinished one (the old run is stopped).
 function makeRunner() {
   let w = null, busy = false, seq = 0, pending = null, workerOk = typeof Worker === 'function';
   const spawn = () => {
-    try { w = new Worker('solver.js'); } catch (e) { workerOk = false; w = null; return; }
+    try { w = new Worker('solver.js?v=20261117'); } catch (e) { workerOk = false; w = null; return; }
     w.onmessage = e => { busy = false; const p = pending; pending = null; if (p && e.data.id === p.id) p.resolve(e.data); };
-    w.onerror = () => { busy = false; workerOk = false; const p = pending; pending = null; if (p) p.resolve(runHere(p.payload)); };
+    w.onerror = e => { if (e && e.preventDefault) e.preventDefault(); busy = false; workerOk = false; const p = pending; pending = null; if (p) p.resolve(runHere(p.payload)); };
   };
   const runHere = d => {   // fallback when workers aren't available (e.g. a file opened from disk)
+    if (typeof rummySolve !== 'function') return { res: null, ms: 0, failed: true };   // solver.js didn't load
     const t0 = performance.now();
     let res;
-    if (d.mode === 'check') res = solve(d.table, empty(), d.tj, 0, false, true);
+    if (d.mode === 'check') res = rummySolve(d.table, empty(), d.tj, 0, false, true);
     else {
-      res = solve(d.table, d.rack, d.tj, d.rj, d.initial, false);
-      if (!res && !d.initial) { res = solve(d.table, d.rack, d.tj, d.rj, false, true); if (res) res.relaxed = true; }
+      res = rummySolve(d.table, d.rack, d.tj, d.rj, d.initial, false, d.saveJ);
+      if (!res && !d.initial) { res = rummySolve(d.table, d.rack, d.tj, d.rj, false, true, d.saveJ); if (res) res.relaxed = true; }
     }
     return { res, ms: Math.round(performance.now() - t0) };
   };
@@ -311,7 +320,7 @@ const runCheckJob = makeRunner(), runSolveJob = makeRunner();
 
 const COLORS = ['Red', 'Blue', 'Black', 'Orange'];
 const empty = () => [0, 1, 2, 3].map(() => Array(14).fill(0));
-let state = { table: empty(), rack: empty(), tj: 0, rj: 0, initial: false };
+let state = { table: empty(), rack: empty(), tj: 0, rj: 0, initial: false, saveJ: true };
 
 try {
   const saved = JSON.parse(localStorage.getItem('rummikub-solver') || 'null');
@@ -332,7 +341,7 @@ function updateHist() {
   const b = document.getElementById('hist-back'), f = document.getElementById('hist-fwd');
   if (!b) return;
   b.disabled = !past.length; f.disabled = !future.length;
-  document.getElementById('hist-count').textContent = past.length ? `${past.length} step${past.length === 1 ? '' : 's'} back` : 'No changes yet';
+  document.getElementById('hist-count').textContent = '';
 }
 function travel(dir) {
   const from = dir < 0 ? past : future, to = dir < 0 ? future : past;
@@ -379,6 +388,7 @@ function render() {
   document.getElementById('tj-val').textContent = jl(state.tj);
   document.getElementById('rj-val').textContent = jl(state.rj);
   document.getElementById('initial').checked = state.initial;
+  document.getElementById('savej').checked = state.saveJ !== false;
   document.getElementById('example').textContent = state.ex ? 'Clear example' : 'Load example';
   updateTabCounts();
   scheduleCheck();
@@ -400,13 +410,14 @@ async function checkTable() {
   if (n === 0) {
     cells.forEach(b => b.classList.remove('suspect'));
     el.className = 'tcheck';
-    el.textContent = 'Mark every tile in the middle of the table, from all players’ sets, not just the ones you want to change.';
+    el.textContent = 'Tap every tile on the table, from all sets.';
     return;
   }
   clearTimeout(slowTimer);
-  slowTimer = setTimeout(() => { el.className = 'tcheck'; el.textContent = 'Checking the table…'; }, 250);
+  slowTimer = setTimeout(() => { el.className = 'tcheck'; el.textContent = 'Checking…'; }, 250);
   const job = await runCheckJob({ mode: 'check', table: state.table, tj: state.tj });
   if (!job) return;                         // replaced by a newer check
+  if (job.failed) { clearTimeout(slowTimer); el.className = 'tcheck warn'; el.textContent = 'The solver didn’t load. Refresh the page (Ctrl+F5).'; return; }
   clearTimeout(slowTimer);
   cells.forEach(b => b.classList.remove('suspect'));
   const res = job.res;
@@ -414,14 +425,14 @@ async function checkTable() {
   const badJ = res ? res.leftoverJ : 0;
   if (!bad.length && !badJ) {
     el.className = 'tcheck ok';
-    el.textContent = `✓ Table checks out: all ${n} tiles fit into valid sets.`;
+    el.textContent = `✓ Table OK (${n} tiles)`;
     return;
   }
   bad.forEach(t => cells.forEach(b => { if (+b.dataset.c === t.c && +b.dataset.v === t.v) b.classList.add('suspect'); }));
   const names = bad.map(tileName).concat(badJ ? [badJ + ' joker' + (badJ > 1 ? 's' : '')] : []);
   const k = names.length;
   el.className = 'tcheck warn';
-  el.innerHTML = `<strong>⚠ ${k === 1 ? 'This tile doesn’t' : 'These tiles don’t'} fit any set: ${names.join(', ')}.</strong> ${bad.length ? (bad.length === 1 ? 'It’s outlined in red. ' : 'They’re outlined in red. ') : ''}You may have missed a tile next to ${k === 1 ? 'it' : 'them'}, or tapped one by mistake. You can still press Find best move; ${k === 1 ? 'it' : 'they'}’ll be set aside.`;
+  el.innerHTML = `<strong>⚠ Doesn’t fit: ${names.join(', ')}.</strong> Check the table (outlined in red).`;
 }
 
 function stepper(id, key, delta) {
@@ -437,6 +448,7 @@ stepper('rj-minus', 'rj', -1); stepper('rj-plus', 'rj', 1);
 document.getElementById('clear-table').addEventListener('click', () => { state.table = empty(); state.tj = 0; state.ex = false; render(); save(); });
 document.getElementById('clear-rack').addEventListener('click', () => { state.rack = empty(); state.rj = 0; state.ex = false; render(); save(); });
 document.getElementById('initial').addEventListener('change', e => { state.initial = e.target.checked; save(); });
+document.getElementById('savej').addEventListener('change', e => { state.saveJ = e.target.checked; save(); runSolve(); });
 
 function tileHTML(t) {
   const cls = 'tile' + (t.src === 'rack' ? ' fresh' : '') + (t.joker ? ' joker' : '');
@@ -449,30 +461,35 @@ async function runSolve() {
   const count = g => g.flat().reduce((a, b) => a + b, 0);
   if (count(state.rack) + state.rj === 0) {
     runSolveJob({ mode: 'check', table: empty(), tj: 0 });   // stops any unfinished solve
-    out.innerHTML = '<h2>Result</h2><p class="empty-msg">Add the tiles in your rack to see what you can play.</p>';
+    out.innerHTML = '<h2>Best move</h2><p class="empty-msg">Add your rack tiles to see it here.</p>';
     return;
   }
-  out.innerHTML = '<h2>Result</h2><p class="empty-msg">Working it out… <span class="spinner" aria-hidden="true"></span></p>';
-  const snap = JSON.parse(JSON.stringify({ table: state.table, rack: state.rack, tj: state.tj, rj: state.rj, initial: state.initial }));
+  out.innerHTML = '<h2>Best move</h2><p class="empty-msg">Thinking… <span class="spinner" aria-hidden="true"></span></p>';
+  const snap = JSON.parse(JSON.stringify({ table: state.table, rack: state.rack, tj: state.tj, rj: state.rj, initial: state.initial, saveJ: state.saveJ !== false }));
   const job = await runSolveJob(Object.assign({ mode: 'solve' }, snap));
   if (!job) return;                         // a newer request replaced this one
+  if (job.failed) { out.innerHTML = '<h2>Best move</h2><p class="empty-msg">The solver didn’t load. Refresh the page (Ctrl+F5).</p>'; return; }
   {
     let res = job.res;
     const ms = job.ms;
     let warn = '';
     if (res && res.relaxed) {
       const names = res.leftover.map(tileName).concat(res.leftoverJ ? [res.leftoverJ + ' joker' + (res.leftoverJ > 1 ? 's' : '')] : []);
-      warn = `<div class="warnbox"><strong>Some table tiles were set aside:</strong> ${names.join(', ')}. They don’t fit any set, so this answer leaves them out. Fix them in step 1 (they’re outlined in red) for an exact answer.</div>`;
+      warn = `<div class="warnbox">⚠ Left out (don’t fit): ${names.join(', ')}</div>`;
     }
+    const saving = snap.saveJ && snap.rj > 0;
+    const keptNote = saving ? '<div class="jnote">🃏 Joker kept: it wouldn’t win this round.</div>' : '';
     if (!res) {
-      out.innerHTML = '<h2>No first meld yet</h2><p class="empty-msg">Your rack can’t make sets worth 30 points on its own. Draw a tile and try again next turn.</p>';
+      out.innerHTML = '<h2>No first meld</h2>' + keptNote + '<p class="empty-msg">Can’t reach 30 points' + (saving ? ' without your joker' : '') + '. Draw a tile.</p>';
       return;
     }
     if (res.count === 0) {
-      out.innerHTML = '<h2>No playable tiles</h2>' + warn + '<p class="empty-msg">Nothing from your rack fits, even after rearranging the table. Draw a tile this turn.</p>';
+      out.innerHTML = '<h2>No move</h2>' + warn + keptNote + '<p class="empty-msg">Nothing fits' + (saving ? ' without your joker' : '') + '. Draw a tile.</p>';
       return;
     }
     const played = res.sets.flatMap(s => s.tiles).filter(t => t.src === 'rack');
+    const jUsed = played.filter(t => t.joker).length;
+    if (saving) warn += jUsed ? '<div class="jnote win">🃏 <strong>Joker played: you win!</strong></div>' : keptNote;
     const sets = res.sets;
     const usesRack = st => st.tiles.some(t => t.src === 'rack');
     const mine = sets.filter(usesRack), rest = sets.filter(st => !usesRack(st));
@@ -482,22 +499,20 @@ async function runSolve() {
         <span class="big">Play ${res.count} tile${res.count === 1 ? '' : 's'}</span>
         <span class="pill">${res.value} points</span>
         ${state.initial ? '<span class="pill warn">First meld</span>' : ''}
-        <span class="pill">${sets.length} sets · ${ms} ms</span>
       </div>
-      <div><div class="label rstep"><span class="step sm">A</span>Take these tiles from your rack</div><div class="set" style="margin-top:6px;flex-wrap:wrap">${played.map(tileHTML).join('')}</div></div>
+      <div><div class="label rstep"><span class="step sm">A</span>From your rack</div><div class="set" style="margin-top:6px;flex-wrap:wrap">${played.map(tileHTML).join('')}</div></div>
       <div>
-        <div class="label rstep"><span class="step sm">B</span>${state.initial ? 'Lay down these sets' : 'Build these sets'} <span class="pill new">${mine.length}</span></div>
-        <div class="legend" style="margin:6px 0 10px"><span class="tile fresh"><span class="k0">5</span></span> outlined tiles come from your rack</div>
+        <div class="label rstep"><span class="step sm">B</span>${state.initial ? 'Lay down' : 'Build these'}</div>
+        <div style="height:8px"></div>
         <div class="sets">${mine.map(setHTML).join('')}</div>
       </div>
       ${rest.length ? `<details class="rest" open>
-        <summary><span class="label rstep"><span class="step sm">C</span>Check the rest of the table</span> <span class="pill">${rest.length} set${rest.length === 1 ? '' : 's'}</span> <span class="tog">Show</span></summary>
-        <p class="rest-note">These sets use only tiles already on the table. If one matches a set on your table, leave it alone. If not, the solver split or rebuilt it to make room for your move, so rearrange it to match.</p>
+        <summary><span class="label rstep"><span class="step sm">C</span>Rest of the table</span> <span class="tog">Show</span></summary>
+        <p class="rest-note">Rearrange the table to match.</p>
         <div class="sets">${rest.map(setHTML).join('')}</div>
       </details>` : ''}
       <div class="apply-bar">
-        <button type="button" class="btn apply" id="apply">✓ I played this move</button>
-        <span class="apply-note">Moves these ${res.count} tile${res.count === 1 ? '' : 's'} from your rack to the table, ready for your next turn.</span>
+        <button type="button" class="btn apply" id="apply">✓ I played this</button>
       </div>`;
     lastPlayed = played;
     document.getElementById('apply').addEventListener('click', applyMove);
@@ -518,14 +533,14 @@ function applyMove() {
   const out = document.getElementById('result');
   const left = state.rack.flat().reduce((a, b) => a + b, 0) + state.rj;
   out.innerHTML = `
-    <h2>${left === 0 ? 'Rack empty. You win!' : 'Table updated'}</h2>
-    <p class="empty-msg">${n} tile${n === 1 ? '' : 's'} moved from your rack to the table${left ? `, and you have ${left} left` : ''}. Before your next turn, add any tiles you draw to step 2 and any tiles other players put down to step 1, then press Find best move again.</p>
+    <h2>${left === 0 ? 'You win! 🎉' : 'Done!'}</h2>
+    <p class="empty-msg">${n} tile${n === 1 ? '' : 's'} moved to the table. Add new tiles, then solve again.</p>
     <div class="apply-bar"><button type="button" class="btn ghost" id="undo">Undo</button></div>`;
   document.getElementById('undo').addEventListener('click', () => {
     travel(-1);
   });
 }
-document.getElementById('solve').addEventListener('click', runSolve);
+document.getElementById('find-btn').addEventListener('click', runSolve);
 
 function loadExample() {
   const put = (g, list) => list.forEach(([c, v]) => g[c][v]++);
@@ -591,7 +606,7 @@ document.getElementById('restart').addEventListener('click', e => {
   }
   clearTimeout(restartArmed); restartArmed = null;
   btn.textContent = '↺ Start over'; btn.classList.remove('armed');
-  state = { table: empty(), rack: empty(), tj: 0, rj: 0, initial: false, ex: false };
+  state = { table: empty(), rack: empty(), tj: 0, rj: 0, initial: false, ex: false, saveJ: true };
   past = []; future = []; histCur = null; lastPlayed = null;
   try { localStorage.removeItem('rummikub-solver'); } catch (err) {}
   render(); save(); runSolve();

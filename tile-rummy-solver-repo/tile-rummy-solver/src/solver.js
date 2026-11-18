@@ -37,8 +37,11 @@ function colorOptions(pi, lo, hi, jRem) {
 
 const groupsOk = (gs, mg) => gs === 0 || (mg <= 1 && gs >= 3 && gs <= 4) || (gs >= 6 && gs <= 8);
 
-function solve(table, rack, tableJ, rackJ, initial, relax) {
+function rummySolve(table, rack, tableJ, rackJ, initial, relax, saveJ) {
   if (initial) { tableJ = 0; relax = false; }
+  // saveJ: keep rack jokers unless playing them empties the rack (wins the round this turn)
+  let rackReal = 0;
+  for (let c = 0; c < 4; c++) for (let v = 1; v <= 13; v++) rackReal += rack[c][v];
   const J = tableJ + rackJ;
   const enc = (ps, j, gs, mg) => (((((ps[0] * 10 + ps[1]) * 10 + ps[2]) * 10 + ps[3]) * 3 + j) * 9 + gs) * 3 + mg;
   const better = (x, y) => {
@@ -84,7 +87,9 @@ function solve(table, rack, tableJ, rackJ, initial, relax) {
     if (!n0.ps.every(p => PAIRS[p].every(L => L === 0 || L === 3))) continue;
     const jt = Math.min(n0.j, tableJ);           // table jokers that were placed
     if (!relax && jt < tableJ) continue;
+    const jr = n0.j - jt;                        // rack jokers played
     const n = Object.assign({}, n0, { cnt: n0.cnt - jt, miss: n0.miss + (tableJ - jt) });
+    if (saveJ && jr > 0 && n.cnt < rackReal + rackJ) continue;   // joker only if it wins
     if (initial && n.val < 30) continue;
     if (!best || better(n, best)) best = n;
   }
@@ -140,7 +145,7 @@ function build(choices, tableJ, best) {
   return { sets, played, count: best.cnt, value, leftover, leftoverJ };
 }
 
-if (typeof module !== 'undefined') module.exports = { solve };
+if (typeof module !== 'undefined') module.exports = { solve: rummySolve, rummySolve };
 
 // ---- Web Worker entry: the page sends {id, mode, ...}; we reply {id, res, ms} ----
 if (typeof importScripts === 'function') {
@@ -149,10 +154,10 @@ if (typeof importScripts === 'function') {
     const d = e.data, t0 = Date.now();
     let res;
     if (d.mode === 'check') {
-      res = solve(d.table, blank(), d.tj, 0, false, true);
+      res = rummySolve(d.table, blank(), d.tj, 0, false, true);
     } else {
-      res = solve(d.table, d.rack, d.tj, d.rj, d.initial, false);
-      if (!res && !d.initial) { res = solve(d.table, d.rack, d.tj, d.rj, false, true); if (res) res.relaxed = true; }
+      res = rummySolve(d.table, d.rack, d.tj, d.rj, d.initial, false, d.saveJ);
+      if (!res && !d.initial) { res = rummySolve(d.table, d.rack, d.tj, d.rj, false, true, d.saveJ); if (res) res.relaxed = true; }
     }
     self.postMessage({ id: d.id, res, ms: Date.now() - t0 });
   };

@@ -95,10 +95,10 @@ app_ld = ld({"@context": "https://schema.org", "@type": "WebApplication", "name"
              "description": home_desc, "author": {"@type": "Person", "name": "Carlo J"}})
 t = re.sub(r'<meta charset="utf-8">.*?<style>', lambda m: head('index.html', home_title, home_desc, app_ld) + '<style>', t, count=1, flags=re.S)
 t = t.replace('<h1>Rummikub Solver</h1>', f'<h1>{NAME}</h1>')
-t = t.replace('<p class="lede">Tap the tiles', '<p class="lede">Works with Rummikub and other tile rummy games. Tap the tiles')
+t = t.replace('<p class="lede">Tap your tiles. Get the best move.</p>', '<p class="lede">Tap your tiles. Get the best move. Works with Rummikub-style games.</p>')
 t = t.replace('<br>Made by Carlo J.</p>', '</p>')
 t = t.replace('<body>\n<main>', '<body>\n' + topbar('index.html') + '\n<main>')
-t = t.replace('</main>\n\n<script src="solver.js">', '</main>\n' + FOOT + '\n\n<script src="solver.js">', 1)
+t = t.replace('</main>\n\n<script src="solver.js', '</main>\n' + FOOT + '\n\n<script src="solver.js', 1)
 assert 'class="topbar"' in t and 'class="sitefoot"' in t and 'fonts.googleapis' not in t and '/*PUZZLES*/' not in t
 (OUT / 'index.html').write_text(t)
 (OUT / 'solver.js').write_text(open(SRC / 'solver.js').read())
@@ -227,7 +227,8 @@ f'''<h1>Joker rules and tips</h1>
 </ul>
 
 <h2>Jokers in the solver</h2>
-<p>Use the + buttons next to each grid to add jokers on the table and in your rack. The solver decides what each joker should stand for and shows it as ☺ in the answer. Try the <a href="index.html#puzzle-5">joker puzzle</a>.</p>''')
+<p>Use the + buttons next to each grid to add jokers on the table and in your rack. The solver decides what each joker should stand for and shows it as ☺ in the answer. Try the <a href="index.html#puzzle-5">joker puzzle</a>.</p>
+<p><strong>Save my jokers</strong> is on by default. The solver then keeps the jokers in your rack unless playing them lets you empty your rack and win the round, so you don't hand an opponent a free joker. Untick it to see every move that uses your jokers.</p>''')
 
 # ---------------- Scoring ----------------
 page('scoring.html', 'Rummikub Scoring: How to Count Points at the End',
@@ -331,7 +332,7 @@ faqs = [
  ('How does it find the best move?', 'It checks every legal way to arrange the table tiles plus your rack into runs and groups, using a method called dynamic programming. The answer is the move that plays the most tiles from your rack, with higher tiles breaking ties. The About page explains more.'),
  ('Why does it say a tile doesn\'t fit any set?', 'The tiles you marked as on the table can\'t all be arranged into valid sets, which usually means a tile was missed or tapped by mistake. The tiles that don\'t fit are outlined in red. If you solve anyway, they\'re set aside and listed in the answer.'),
  ('How do I enter two copies of the same tile?', 'Tap the tile twice. The two dots under the number show how many copies you\'ve marked. A third tap clears it, and a grey dot means that copy is already marked in the other grid.'),
- ('Can it handle jokers?', 'Yes. Add jokers with the + buttons next to the table and the rack. The solver decides what each joker should stand for.'),
+ ('Can it handle jokers?', 'Yes. Add jokers with the + buttons next to the table and the rack. The solver decides what each joker should stand for. With Save my jokers ticked (the default), it only plays a joker from your rack when that wins you the round, since a joker on the table can be taken by an opponent.'),
  ('Does it save my board?', 'Yes, on your own device. Your last board is kept in your browser so it\'s still there next time, and Back and Forward let you step through your changes. Start over clears everything. Nothing is sent to a server.'),
  ('Does it work on my phone?', 'Yes. On a phone the grids show one color at a time with bigger tiles: use the Red, Blue, Black and Orange tabs to switch.'),
  ('Can it find my first meld?', 'Yes. Mark your rack, tick First meld, and it finds the highest-scoring opening play from your own tiles, or tells you to draw if you can\'t reach 30.'),
